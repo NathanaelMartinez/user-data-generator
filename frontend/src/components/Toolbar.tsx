@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface ToolbarProps {
-    onFetchUsers: (region: string, seed: number, errorSize: number, ) => void;
+    onFetchUsers: (region: string, seed: number, errorSize: number,) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
@@ -20,6 +20,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
     const handleSeedChange = (value: number) => {
         setSeed(value);
     };
+
+    // listen for changes to update table
+    useEffect(() => {
+        if (errorSize !== 0 || seed !== 0) {
+            handleFetch();
+        }
+        // onFetchUsers(region, seed, errorSize);
+    }, [region, errorSize, seed]);
 
     return (
         <div>
