@@ -13,6 +13,12 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
         onFetchUsers(region, seed, errorSize);
     };
 
+    const generateRandomSeed = () => {
+        // generate random 7-digit seed
+        const randomSeed = Math.floor(1000000 + Math.random() * 9000000);
+        setSeed(randomSeed); // update seed state with new random seed
+    };
+
     const handleErrorSizeChange = (value: number) => {
         setErrorSize(value);
     };
@@ -26,7 +32,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
         if (errorSize !== 0 || seed !== 0) {
             handleFetch();
         }
-        // onFetchUsers(region, seed, errorSize);
     }, [region, errorSize, seed]);
 
     return (
@@ -59,7 +64,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
                 placeholder="Seed"
                 onChange={(e) => handleSeedChange(Number(e.target.value))}
             />
-            <button onClick={handleFetch}>Generate</button>
+            <button onClick={generateRandomSeed}>Generate</button>
             <button>Export to CSV</button>
         </div>
     );
