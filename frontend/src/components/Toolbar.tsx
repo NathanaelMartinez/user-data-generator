@@ -24,17 +24,17 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
                 <option value="it">Italy</option>
             </select>
             <input
-                type="text"
-                value={seed}
-                placeholder="Seed"
-                onChange={(e) => setSeed(Number(e.target.value))}
-            />
-            <input
                 type="number"
                 value={errorSize}
                 min="0"
                 max="1000"
                 onChange={(e) => setErrorSize(Number(e.target.value))}
+            />
+            <input
+                type="text"
+                value={seed}
+                placeholder="Seed"
+                onChange={(e) => setSeed(Number(e.target.value))}
             />
             <button onClick={handleFetch}>Generate</button>
             <button>Export to CSV</button>
