@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Toolbar from './components/Toolbar';
 
 const App = () => {
     const [users, setUsers] = useState([]);
@@ -12,16 +13,17 @@ const App = () => {
     };
 
     useEffect(() => {
-        const localeId = 'en_US';
-        const seed = 123234234;
-        const errorSize = 0;
+        // const localeId = 'en_US';
+        // const seed = 123234234;
+        // const errorSize = 0;
 
-        fetchUsers(localeId, seed, errorSize);
+        // fetchUsers(localeId, seed, errorSize);
     }, []);
 
     return (
         <div>
             <h1>Random User Data Generator</h1>
+            <Toolbar onFetchUsers={fetchUsers} />
             <pre>{JSON.stringify(users, null, 2)}</pre>
         </div>
     );
