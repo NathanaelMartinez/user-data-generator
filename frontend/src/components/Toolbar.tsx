@@ -13,6 +13,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
         onFetchUsers(region, seed, errorSize);
     };
 
+    const handleErrorSizeChange = (value: number) => {
+        setErrorSize(value);
+    };
+
+    const handleSeedChange = (value: number) => {
+        setSeed(value);
+    };
+
     return (
         <div>
             <select value={region} onChange={(e) => setRegion(e.target.value)}>
@@ -24,17 +32,24 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
                 <option value="it">Italy</option>
             </select>
             <input
+                type="range"
+                min="0"
+                max="10"
+                value={Math.min(errorSize, 10)} // slider capped at 10
+                onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
+            />
+            <input
                 type="number"
                 value={errorSize}
                 min="0"
                 max="1000"
-                onChange={(e) => setErrorSize(Number(e.target.value))}
+                onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
             />
             <input
-                type="text"
+                type="number"
                 value={seed}
                 placeholder="Seed"
-                onChange={(e) => setSeed(Number(e.target.value))}
+                onChange={(e) => handleSeedChange(Number(e.target.value))}
             />
             <button onClick={handleFetch}>Generate</button>
             <button>Export to CSV</button>
