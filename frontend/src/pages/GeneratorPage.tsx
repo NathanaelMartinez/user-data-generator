@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import Toolbar from '../components/Toolbar';
 import UserTable from '../components/UserTable';
+import { generateUsers } from '../utils/RandomUserGenerator';
 
-const HomePage: React.FC = () => {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(false);
-    
-    const fetchUsers = async (localeId: string, seed: number, errorSize: number) => {
+interface User {
+    id: string;
+    name: string;
+    address: string;
+    phone: string;
+}
+
+const GeneratorPage: React.FC = () => {
+    const [users, setUsers] = useState<User[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const fetchUsers = (localeId: string, seed: number, errorSize: number) => {
         setLoading(true);
-        const response = await fetch(`/api/users/${localeId}/${seed}/${errorSize}`);
-        const data = await response.json();
+        const data = generateUsers(localeId, seed, errorSize);
         setUsers(data);
         setLoading(false);
     };
@@ -31,4 +38,4 @@ const HomePage: React.FC = () => {
     );
 };
 
-export default HomePage;
+export default GeneratorPage;
