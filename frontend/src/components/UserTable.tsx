@@ -13,7 +13,13 @@ interface UserTableProps {
 }
 
 const UserTable: React.FC<UserTableProps> = ({ users, loading }) => {
-    if (loading) return <p>Loading...</p>;
+    if (loading) return (
+        <div className="text-center">
+            <div className="spinner-border mt-5" style={{ width: '4rem', height: '4rem' }} role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    );
 
     return (
         <table className="table table-bordered table-hover">
