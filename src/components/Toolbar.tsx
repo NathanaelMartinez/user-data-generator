@@ -60,6 +60,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
                     type="range"
                     min="0"
                     max="10"
+                    step="0.5"  // allow increments of 0.5
                     value={Math.min(errorSize, 10)} // slider capped at 10
                     onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
                     className="form-control-range mx-2"
