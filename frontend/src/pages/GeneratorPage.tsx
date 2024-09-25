@@ -3,13 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Toolbar from '../components/Toolbar';
 import UserTable from '../components/UserTable';
 import { generateUsers } from '../utils/RandomUserGenerator';
-
-interface User {
-    id: string;
-    name: string;
-    address: string;
-    phone: string;
-}
+import User from '../models/User';
 
 const GeneratorPage: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -18,7 +12,7 @@ const GeneratorPage: React.FC = () => {
     const [localeId, setLocaleId] = useState<string>('en_US');
     const [seed, setSeed] = useState<number>(0);
     const [errorSize, setErrorSize] = useState<number>(0);
-    const [page, setPage] = useState<number>(1); // Start at page 1
+    const [page, setPage] = useState<number>(1);
 
     // This function now ensures that each page gets its unique seed-based data
     const fetchUsers = (localeId: string, seed: number, errorSize: number, page: number) => {
