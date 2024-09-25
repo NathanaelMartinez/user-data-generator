@@ -17,13 +17,13 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
     const generateRandomSeed = () => {
         // Generate random 7-digit seed
         const randomSeed = Math.floor(1000000 + Math.random() * 9000000);
-        setSeed(randomSeed); // Update seed state with new random seed
-        handleFetch(); // Trigger fetch right after generating new seed
+        setSeed(randomSeed); // update seed state with generated seed
+        handleFetch(); // trigger fetch right after generating new seed
     };
 
     const handleErrorSizeChange = (value: number) => {
-        if (value > 1000) {
-            setErrorSize(1000);
+        if (value > 1000) { // cannot exceed 1000
+            setErrorSize(1000); 
         } else {
             setErrorSize(value);
         }
@@ -31,12 +31,12 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
 
     const handleSeedChange = (value: number) => {
         setSeed(value);
-        handleFetch(); // Trigger fetch when seed is manually changed
+        handleFetch(); // trigger fetch when seed is manually changed
     };
 
-    // Listen for changes in region or error size to update table
+    // listen for changes in region or error size to update table
     useEffect(() => {
-        handleFetch(); // Automatically fetch on region or errorSize changes
+        handleFetch(); // automatically fetch on region or errorSize changes
     }, [region, errorSize, seed]);
 
     return (
@@ -60,7 +60,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
                     type="range"
                     min="0"
                     max="10"
-                    value={Math.min(errorSize, 10)} // Slider capped at 10
+                    value={Math.min(errorSize, 10)} // slider capped at 10
                     onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
                     className="form-control-range mx-2"
                 />
