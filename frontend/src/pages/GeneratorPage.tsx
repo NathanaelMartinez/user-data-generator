@@ -23,8 +23,8 @@ const HomePage: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Random User Data Generator</h1>
+        <div className="container-fluid px-5">
+            <h1 className="mb-4 text-center">Random User Data Generator</h1>
             <Toolbar onFetchUsers={fetchUsers} />
             <UserTable users={users} loading={loading} />
         </div>

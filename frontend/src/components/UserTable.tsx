@@ -16,8 +16,8 @@ const UserTable: React.FC<UserTableProps> = ({ users, loading }) => {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <table>
-            <thead>
+        <table className="table table-bordered table-hover">
+            <thead className="table-secondary">
                 <tr>
                     <th>Index</th>
                     <th>ID</th>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface ToolbarProps {
     onFetchUsers: (region: string, seed: number, errorSize: number,) => void;
@@ -29,43 +30,59 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
 
     // listen for changes to update table
     useEffect(() => {
-        if (errorSize !== 0 || seed !== 0) {
-            handleFetch();
-        }
+        handleFetch();
     }, [region, errorSize, seed]);
 
     return (
-        <div>
-            <select value={region} onChange={(e) => setRegion(e.target.value)}>
-                <option value="en_US">USA</option>
-                <option value="es_MX">Mexico</option>
-                <option value="de">Germany</option>
-                <option value="el">Greece</option>
-                <option value="fr">France</option>
-                <option value="it">Italy</option>
-            </select>
-            <input
-                type="range"
-                min="0"
-                max="10"
-                value={Math.min(errorSize, 10)} // slider capped at 10
-                onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
-            />
-            <input
-                type="number"
-                value={errorSize}
-                min="0"
-                max="1000"
-                onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
-            />
-            <input
-                type="number"
-                value={seed}
-                placeholder="Seed"
-                onChange={(e) => handleSeedChange(Number(e.target.value))}
-            />
-            <button onClick={generateRandomSeed}>Generate</button>
-            <button>Export to CSV</button>
+        <div className="mb-3 d-flex flex-row justify-content-between align-items-center">
+            <div className="input-group-sm d-flex align-items-center">
+                    <label className="input-group-text">Region:</label>
+                    <select id="regionSelect" className="form-select mx-2" value={region} onChange={(e) => setRegion(e.target.value)}>
+                        <option value="en_US">USA</option>
+                        <option value="es_MX">Mexico</option>
+                        <option value="de">Germany</option>
+                        <option value="el">Greece</option>
+                        <option value="fr">France</option>
+                        <option value="it">Italy</option>
+                    </select>
+            </div>
+            <div className="input-group-sm d-flex align-items-center flex-row">
+                <span className="input-group-text">Errors:</span>
+                <input
+                    id="errorSizeRange"
+                    type="range"
+                    min="0"
+                    max="10"
+                    value={Math.min(errorSize, 10)} // slider capped at 10
+                    onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
+                    className="form-control-range mx-2"
+                />
+                <input
+                    type="number"
+                    value={errorSize}
+                    min="0"
+                    max="1000"
+                    onChange={(e) => handleErrorSizeChange(Number(e.target.value))}
+                    className="form-control"
+                />
+            </div>
+
+            <div className="input-group-sm d-flex align-items-center">
+                    <label htmlFor="seedInput" className="input-group-text mr-2">Seed:</label>
+                    <input
+                        id="seedInput"
+                        type="number"
+                        value={seed}
+                        placeholder="Seed"
+                        onChange={(e) => handleSeedChange(Number(e.target.value))}
+                        className="form-control ms-2"
+                    />
+                <button className="btn btn-link" onClick={generateRandomSeed}>
+        <i className="bi bi-shuffle fs-2 text-dark"></i>
+    </button>
+            </div>
+
+            <button className="btn border border-dark custom-shadow btn-light">Export</button>
         </div>
     );
 };
