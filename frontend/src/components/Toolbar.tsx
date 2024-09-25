@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface ToolbarProps {
-    onFetchUsers: (region: string, seed: number, errorSize: number,) => void;
+    onFetchUsers: (region: string, seed: number, errorSize: number) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
@@ -21,7 +21,11 @@ const Toolbar: React.FC<ToolbarProps> = ({ onFetchUsers }) => {
     };
 
     const handleErrorSizeChange = (value: number) => {
-        setErrorSize(value);
+        if (value > 1000) {
+            setErrorSize(1000);
+        } else {
+            setErrorSize(value);
+        }
     };
 
     const handleSeedChange = (value: number) => {
